@@ -86,10 +86,10 @@ void SPI_0_initialization(void)
 	SPI_0_init();
 }
 
-void TIMER_1_initialization(void)
+void TIMER_0_initialization(void)
 {
 
-	TIMER_1_init();
+	TIMER_0_init();
 }
 
 void PWM_0_initialization(void)
@@ -98,10 +98,10 @@ void PWM_0_initialization(void)
 	PWM_0_init();
 }
 
-void TIMER_0_initialization(void)
+void TIMER_1_initialization(void)
 {
 
-	TIMER_0_init();
+	TIMER_1_init();
 }
 
 /* configure pins and initialize registers */

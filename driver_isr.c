@@ -39,6 +39,15 @@
 #include "led_config.h"
 
 ISR(TIMER1_COMPA_vect) {
-        SPI_0_write_block(tlc_spi_transferbyte, sizeof(tlc_spi_transferbyte[0]) * TLC_SPI_TRANSFER_SIZE);
-
+    TLC_BLANK_PORT |= 1<<TLC_BLANK;// write blank HIGH to reset the 4096 counter in the TLC
+    TLC_XLAT_PORT |= 1<<TLC_XLAT;// write XLAT HIGH to latch in data from the last data stream
+    TLC_XLAT_PORT &= ~(1<<TLC_XLAT);  //XLAT can go low now
+    TLC_BLANK_PORT &= ~(1<<TLC_BLANK);//Blank goes LOW to start the next cycle
+    //SPI_0_disable();//end the SPI so we can write to the clock pin
+    //TLC_SCLK_PORT |= 1<<TLC_SCLK;// SPI Clock pin to give it the extra count
+    //TLC_SCLK_PORT &= ~(1<<TLC_SCLK_PORT);// The data sheet says you need this for some reason?
+    //SPI_0_enable();
+    // TODO: optimize transfer size
+    SPI_0_write_block(tlc_spi_transferbyte, sizeof(tlc_spi_transferbyte[0]) * TLC_SPI_TRANSFER_SIZE);
+    //while(SPI_0_status_busy());
 }

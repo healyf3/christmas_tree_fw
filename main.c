@@ -12,6 +12,8 @@ int main(void)
    // stdout = &mystdout;
     int a;
     tlc_init();
+    tlc_all_blue();
+
 
 
 	/* Replace with your application code */

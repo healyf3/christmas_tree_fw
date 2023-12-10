@@ -39,26 +39,24 @@
  *
  * \return Initialization status.
  */
-int8_t TIMER_1_init()
+int8_t TIMER_0_init()
 {
 
 	/* Enable TC0 */
 	PRR &= ~(1 << PRTIM0);
 
-	// TCCR0A = (0 << COM0A1) | (0 << COM0A0) /* Normal port operation, OCA disconnected */
-	//		 | (0 << COM0B1) | (0 << COM0B0) /* Normal port operation, OCB disconnected */
-	//		 | (0 << WGM01) | (0 << WGM00); /* TC8 Mode 0 Normal */
+	TCCR0A = (0 << COM0A1) | (0 << COM0A0) /* Normal port operation, OCA disconnected */
+			| (0 << COM0B1) | (1 << COM0B0) /* Normal port operation, Toggle on Compare Match */
+            | (1 << WGM01) | (0 << WGM00); /* TC8 Mode CTC */
 
-	// TCCR0B = 0 /* TC8 Mode 0 Normal */
-	//		 | (0 << CS02) | (0 << CS01) | (0 << CS00); /* No clock source (Timer/Counter stopped) */
+	TCCR0B = (0 << CS02) | (0 << CS01) | (1 << CS00); /* Clki/o (No prescaling) */
 
+            
 	// TIMSK0 = 0 << OCIE0B /* Output Compare B Match Interrupt Enable: disabled */
 	//		 | 0 << OCIE0A /* Output Compare A Match Interrupt Enable: disabled */
 	//		 | 0 << TOIE0; /* Overflow Interrupt Enable: disabled */
 
-	// OCR0A = 0x0; /* Output compare A: 0x0 */
-
-	// OCR0B = 0x0; /* Output compare B: 0x0 */
+	 OCR0B = 0x0; /* Output compare B: 0x0 */
 
 	// GTCCR = 0 << TSM /* Timer/Counter Synchronization Mode: disabled */
 	//		 | 0 << PSRASY /* Prescaler Reset Timer/Counter2: disabled */
@@ -76,17 +74,20 @@ int8_t PWM_0_init()
 {
 
 	/* Enable TC2 */
-	PRR &= ~(1 << PRTIM2);
+// 	PRR &= ~(1 << PRTIM2);
+// 
+// 	TCCR2A = (0 << COM2A1) | (0 << COM2A0)   /* Normal port operation, OCA disconnected */
+// 	         | (0 << COM2B1) | (1 << COM2B0) /* Normal port operation, Toggle on Compare Match */
+// 	         | (1 << WGM21) | (0 << WGM20);  /* TC8 Mode 2 CTC */
+// 
+// 	 TCCR2B |= (0 << CS22) | (0 << CS21) | (1 << CS20); /* Clki/o (No prescaling) */
+// 
+// 	// TIMSK2 = 0 << OCIE2B /* Output Compare B Match Interrupt Enable: disabled */
+// 	//		 | 0 << OCIE2A /* Output Compare A Match Interrupt Enable: disabled */
+// 	//		 | 0 << TOIE2; /* Overflow Interrupt Enable: disabled */
+//     
+//     OCR2B = 0x0; /* Output compare B: 0x0 */
 
-	TCCR2A = (0 << COM2A1) | (0 << COM2A0)   /* Normal port operation, OCA disconnected */
-	         | (0 << COM2B1) | (1 << COM2B0) /* Normal port operation, Toggle on Compare Match */
-	         | (1 << WGM21) | (1 << WGM20);  /* TC8 Mode 2 CTC */
-
-	 TCCR2B |= (0 << CS22) | (0 << CS21) | (1 << CS20); /* No clock source (Timer/Counter stopped) */
-
-	// TIMSK2 = 0 << OCIE2B /* Output Compare B Match Interrupt Enable: disabled */
-	//		 | 0 << OCIE2A /* Output Compare A Match Interrupt Enable: disabled */
-	//		 | 0 << TOIE2; /* Overflow Interrupt Enable: disabled */
 
 	return 0;
 }

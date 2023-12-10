@@ -4,18 +4,18 @@
 #include <compiler.h>
 
 /* ports and pins */
-#define TLC_BLANK_PORT PORTD
-#define TLC_BLANK      PORTD7
-#define TLC_XLAT_PORT  PORTD
-#define TLC_XLAT       PORTD4
+#define TLC_BLANK_PORT PORTC
+#define TLC_BLANK      PORTC1
+#define TLC_XLAT_PORT  PORTC
+#define TLC_XLAT       PORTC0
 #define TLC_SCLK_PORT  PORTB
-#define TLC_SCLK       PORTB7
+#define TLC_SCLK       PORTB5
 #define TLC_SIN_PORT   PORTB
-#define TLC_SIN        PORTB5
-#define TLC_VPRG_PORT  PORTD
-#define TLC_VPRG       PORTD5
+#define TLC_SIN        PORTB3
+#define TLC_VPRG_PORT  PORTC
+#define TLC_VPRG       PORTC2
 #define TLC_GCLK_PORT  PORTD
-#define TLC_GCLK       PORTD6
+#define TLC_GCLK       PORTD5
 
 /* tlc parameters */
 #define TLC_CHANNEL_AMOUNT 32

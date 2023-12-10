@@ -4,7 +4,7 @@
 #include "led_config.h"
 #include "include/spi_basic.h"
 
-#define F_CPU 8000000UL
+#define F_CPU 16000000UL
 #include <util/delay.h>
 
 
@@ -90,8 +90,8 @@ void tlc_set_dot_correction() {
 } // dot_correction
 
 void tlc_init() {
-//     tlc_pin_initialization();
-//     tlc_set_dot_correction();
+     tlc_pin_initialization();
+     tlc_set_dot_correction();
     TIMSK1 |= 1 << OCIE1A;
 
 }
